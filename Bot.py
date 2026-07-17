@@ -11,7 +11,6 @@ from aiogram.enums import ParseMode
 import os
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
-# ============== API КЛЮЧИ ==============
 import os
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
@@ -19,7 +18,6 @@ TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
-# ============== МОДЕЛИ ==============
 MODEL_NAMES = {
     "gpt": "🧠 ChatGPT",
     "deepseek": "🐳 DeepSeek",
@@ -30,10 +28,6 @@ MODEL_NAMES = {
 
 user_models = {}
 
-
-# ============================================================
-#                      СЕРВИС 1: GROQ
-# ============================================================
 
 async def ask_groq(text: str, model: str) -> str:
     if not GROQ_API_KEY:
@@ -68,11 +62,7 @@ async def ask_groq(text: str, model: str) -> str:
                 return None
     except Exception:
         return None
-
-
-# ============================================================
-#                   СЕРВИС 2: TOGETHER.AI
-# ============================================================
+        
 
 async def ask_together(text: str, model: str) -> str:
     if not TOGETHER_API_KEY:
@@ -109,10 +99,6 @@ async def ask_together(text: str, model: str) -> str:
         return None
 
 
-# ============================================================
-#                   СЕРВИС 3: GEMINI
-# ============================================================
-
 async def ask_gemini(text: str, model: str) -> str:
     if not GEMINI_API_KEY:
         return None
@@ -136,10 +122,6 @@ async def ask_gemini(text: str, model: str) -> str:
     except Exception:
         return None
 
-
-# ============================================================
-#                  СЕРВИС 4: OPENROUTER
-# ============================================================
 
 async def ask_openrouter(text: str, model: str) -> str:
     if not OPENROUTER_API_KEY:
@@ -178,10 +160,6 @@ async def ask_openrouter(text: str, model: str) -> str:
         return None
 
 
-# ============================================================
-#                 СЕРВИС 5: POLLINATIONS (FALLBACK)
-# ============================================================
-
 async def ask_pollinations(text: str, model: str) -> str:
     model_map = {
         "gpt": "openai",
@@ -204,10 +182,6 @@ async def ask_pollinations(text: str, model: str) -> str:
     except Exception:
         return None
 
-
-# ============================================================
-#                    ГЛАВНАЯ ФУНКЦИЯ
-# ============================================================
 
 async def ask_ai(user_id: int, text: str) -> tuple:
     if not text or not text.strip():
@@ -237,10 +211,6 @@ async def ask_ai(user_id: int, text: str) -> tuple:
 
     return ("❌", "Все сервисы временно недоступны. Попробуй позже.")
 
-
-# ============================================================
-#                            БОТ
-# ============================================================
 
 bot = Bot(
     token=BOT_TOKEN,
@@ -460,8 +430,8 @@ async def edit_image(message: Message):
 
 
 async def main():
-    print("✅ Бот запущен!")
-    print("🤖 Модели: ChatGPT, DeepSeek, Gemini, Grok, Claude")
+    print("Бот запущен!")
+    print("Модели: ChatGPT, DeepSeek, Gemini, Grok, Claude")
     await dp.start_polling(bot)
 
 
